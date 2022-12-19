@@ -1,20 +1,23 @@
 import _ from 'lodash';
-import printMe from './print.js';
 import './style.css';
+import {UI, addProjectBtn, addTaskBtn} from './UI.js';
 
 
- function component() {
-   const element = document.createElement('div');
-  const btn = document.createElement('button');
+addProjectBtn.addEventListener("click", function () {
+    UI.openProjectModal();
+});
 
-   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const closeProjectModalBtn = document.getElementById("close-project-modal");
+closeProjectModalBtn.addEventListener("click", function () {
+    UI.closeProjectModal()  
+});
 
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
+addTaskBtn.addEventListener("click", function () {
+    UI.openTaskModal()
+});
 
-  element.appendChild(btn);
+const closeTaskModalBtn = document.getElementById("close-task-modal");
+closeTaskModalBtn.addEventListener("click", function () {
+    UI.closeTaskModal()
+});
 
-   return element;
- }
-
- document.body.appendChild(component());
