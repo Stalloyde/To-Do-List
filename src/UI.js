@@ -1,3 +1,4 @@
+import { update } from 'lodash';
 import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
 
@@ -110,6 +111,7 @@ export const UI = (function () {
 
     function updateProjectHeader (projectName) {
         currentProjectHeader.textContent = projectName;
+
         projects.forEach(function (project) {
             if (project.name === projectName) {
                 currentProjectHeader.id = project.id; 
@@ -174,7 +176,6 @@ export const UI = (function () {
 
     function deleteProjectDiv (e) {
         const projectList = document.querySelectorAll(".project-list");
-
         projectList.forEach(function (project) {
             if (e.target.id === project.id) {
                 project.remove();
@@ -184,6 +185,11 @@ export const UI = (function () {
                 removeTaskListDOM();
                 appendCurrentProjectTasks();
             };
+
+            const projectListLength = Array.from(projectList).length 
+            if (projectListLength === 1) {
+                updateProjectHeader();
+            }
         });
     };
 
@@ -196,7 +202,7 @@ export const UI = (function () {
                 const currentProject = projectsManager.setCurrentProject(project.id);
                 updateProjectHeader(currentProject.name);
                 project.style.backgroundColor = "rgb(250, 170, 141)";
-            };
+            }
         });
     };
 
