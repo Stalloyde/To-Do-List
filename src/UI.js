@@ -302,7 +302,7 @@ export const UI = (function () {
                 
                 const editTaskDateInput = document.createElement("input");
                 editTaskDateInput.setAttribute("type","date");
-                const originalTaskDate = task.querySelector(".due-date").textContent;
+                const originalTaskDate = tasksManager.getCurrentTask(task.id).dueDate;
                 editTaskDateInput.value = originalTaskDate;
                 editTaskDateInput.className = "edit-due-date";
                 editTaskContainer.appendChild(editTaskDateInput);
@@ -334,7 +334,7 @@ export const UI = (function () {
                         taskName.textContent = editTaskNameInput.value;
                         taskDescription.textContent = editTaskDescriptionInput.value;
                         dueDate.textContent = format(new Date(editTaskDateInput.value), "dd LLL yy");
-                        tasksManager.editTask(task.id, taskName.textContent, taskDescription.textContent, dueDate.textContent);
+                        tasksManager.editTask(task.id, taskName.textContent, taskDescription.textContent, editTaskDateInput.value);
                         editTaskContainer.remove();
                     };
                 }); 
