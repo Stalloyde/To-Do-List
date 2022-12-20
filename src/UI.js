@@ -143,7 +143,7 @@ export const UI = (function () {
                 const projectSubmitEdit = document.createElement("button");
                 projectSubmitEdit.className = "submit-edit-btn";
                 projectSubmitEdit.id = project.id;
-                projectSubmitEdit.textContent = "Submit";
+                projectSubmitEdit.textContent = "Edit";
                 editProjectBtnContainer.appendChild(projectSubmitEdit);
 
                 const projectCancelEdit = document.createElement("button");
@@ -153,6 +153,7 @@ export const UI = (function () {
                 editProjectBtnContainer.appendChild(projectCancelEdit);
 
                 projectSubmitEdit.addEventListener("click", function () {
+                    console.log(projects.length)
                     if (editProjectInput.value !== "")  {
                         const projectName = project.querySelector(".project-name");
                         let projectNewName = editProjectInput.value;
@@ -161,7 +162,7 @@ export const UI = (function () {
                         projectName.textContent = projectNewName;
                         project.style.display = "grid";
                         projectsManager.editProject(project.id, projectNewName);
-                        projectsManager.setCurrentProject(project.id);
+                        setAsCurrentProject(project.id)
                     };
                 });
 
@@ -187,7 +188,7 @@ export const UI = (function () {
             };
 
             const projectListLength = Array.from(projectList).length 
-            if (projectListLength === 1) {
+            if (projectListLength.length === 1) {
                 updateProjectHeader();
             }
         });
@@ -312,7 +313,7 @@ export const UI = (function () {
                 const taskSubmitEdit = document.createElement("button");
                 taskSubmitEdit.className = "submit-edit-btn";
                 taskSubmitEdit.id = task.id;
-                taskSubmitEdit.textContent = "Submit";
+                taskSubmitEdit.textContent = "Edit";
                 editTaskBtnContainer.appendChild(taskSubmitEdit);
 
                 const taskCancelEdit = document.createElement("button");
