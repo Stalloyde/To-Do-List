@@ -399,8 +399,8 @@ export const UI = (function () {
                         dueDate.classList.add("complete");  
                         task.classList.add("complete");                    
                     };
-                };
                 tasksManager.updateTaskStatus(task.id);
+                };
         });
     };
 
