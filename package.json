@@ -34,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/Stalloyde/to-do-list/issues"
   },
-  "homepage": "https://github.com/Stalloyde/to-do-list#readme"
+  "homepage": "https://github.com/Stalloyde/to-do-list#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  }
 }
