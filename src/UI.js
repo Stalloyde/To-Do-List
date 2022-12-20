@@ -385,22 +385,24 @@ export const UI = (function () {
         const taskList = document.querySelectorAll(".task-list");
 
         taskList.forEach(function (task) {
-                const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
-                const editTaskBtn = task.querySelector(".edit-task-btn");
-                const dueDate = task.querySelector(".due-date");
-                
-                    if (e.target.id === task.id && e.target != editTaskBtn) {
-                        if (tasksManager.getCurrentTask(task.id).status === "Complete") {  
-                            taskNameDescriptionContainer.style.textDecoration = "none";
-                            dueDate.style.textDecoration = "none";
-                        } else {
-                            taskNameDescriptionContainer.style.textDecoration = "line-through";
-                            dueDate.style.textDecoration = "line-through";  
-                        }
-                        tasksManager.updateTaskStatus(task.id);
-                    }
-                })
-    }
+            const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
+            const editTaskBtn = task.querySelector(".edit-task-btn");
+            const dueDate = task.querySelector(".due-date");
+            
+                if (e.target.id === task.id && e.target != editTaskBtn) {
+                    if (tasksManager.getCurrentTask(task.id).status === "Complete") {  
+                        taskNameDescriptionContainer.classList.remove("complete");
+                        dueDate.classList.remove("complete");
+                        task.classList.remove("complete");                   
+                    } else {
+                        taskNameDescriptionContainer.classList.add("complete");
+                        dueDate.classList.add("complete");  
+                        task.classList.add("complete");                    
+                    };
+                };
+                tasksManager.updateTaskStatus(task.id);
+        });
+    };
 
     return {openProjectModal, closeProjectModal, openTaskModal, taskAddErrorModal, closeTaskModal, appendNewProject, updateProjectHeader, editProject, deleteProjectDiv, setAsCurrentProject, appendNewTask}
 })();
