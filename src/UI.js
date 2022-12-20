@@ -1,6 +1,7 @@
 import { update } from 'lodash';
 import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
+import format from "date-fns/format";
 
 export const addProjectBtn = document.getElementById("add-project-btn");
 export const addTaskBtn = document.getElementById("add-task-btn");
@@ -249,7 +250,7 @@ export const UI = (function () {
         const dueDate = document.createElement("div");
         dueDate.className = "due-date";
         dueDate.id = project.id;
-        dueDate.textContent = project.dueDate;
+        dueDate.textContent = format(new Date(project.dueDate), "dd LLL yy");
         taskList.appendChild(dueDate);
         dueDate.value = "";
 
@@ -332,7 +333,7 @@ export const UI = (function () {
                         
                         taskName.textContent = editTaskNameInput.value;
                         taskDescription.textContent = editTaskDescriptionInput.value;
-                        dueDate.textContent = editTaskDateInput.value;
+                        dueDate.textContent = format(new Date(editTaskDateInput.value), "dd LLL yy");
                         tasksManager.editTask(task.id, taskName.textContent, taskDescription.textContent, dueDate.textContent);
                         editTaskContainer.remove();
                     };
