@@ -27,7 +27,7 @@ export const UI = (function () {
         projectsManager.addProject();
         closeProjectModal();
         updateProjectHeader(projectsManager.mostRecentProject().name);
-        appendNewProject();
+        appendNewProject(projectsManager.mostRecentProject());
         projectsManager.setCurrentProject(projectsManager.mostRecentProject().id);
     });
 
@@ -72,17 +72,17 @@ export const UI = (function () {
         addTaskBtn.style.display = "grid";
     };
 
-    function appendNewProject () {
+    function appendNewProject (project) {
         const projectDiv = document.createElement("div");
-        projectDiv.id = projectsManager.mostRecentProject().id;
+        projectDiv.id = project.id;
         projectDiv.className = "project-list";
         addProjectContainer.insertBefore(projectDiv, projectModal);
         addProjectName.value = "";
 
         const projectName = document.createElement("div");
         projectName.className = "project-name";
-        projectName.id = projectsManager.mostRecentProject().id;
-        projectName.textContent = projectsManager.mostRecentProject().name;
+        projectName.id = project.id;
+        projectName.textContent = project.name;
         projectDiv.appendChild(projectName);
 
         const projectBtnContainer = document.createElement("div");
@@ -91,17 +91,17 @@ export const UI = (function () {
 
         const editBtn = document.createElement("button");
         editBtn.classList.add("project-list-btn", "edit-project-btn");
-        editBtn.id = projectsManager.mostRecentProject().id;
+        editBtn.id = project.id;
         editBtn.textContent = "Edit";   
         projectBtnContainer.appendChild(editBtn);
 
         const delBtn = document.createElement("button");
         delBtn.classList.add("project-list-btn", "del-project-btn");
-        delBtn.id = projectsManager.mostRecentProject().id;
+        delBtn.id = project.id;
         delBtn.textContent = "Delete";
         projectBtnContainer.appendChild(delBtn);
         removeTaskListDOM();
-        setAsCurrentProject(projectsManager.mostRecentProject().id);
+        setAsCurrentProject(project.id);
 
         editBtn.addEventListener("click", editProject);
         delBtn.addEventListener("click", deleteProjectDiv);
