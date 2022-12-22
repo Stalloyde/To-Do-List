@@ -1,4 +1,5 @@
 import {addProjectName} from "./UI.js";
+import {populateStorage} from './localStorage.js';
 
 export const projects = [{
   name: "",
@@ -13,12 +14,14 @@ function projectFactory (name, id) {
 
 
 export const projectsManager = (function () {
-  let projectCount = 1;
+  
   
   function addProject () {
+    let projectCount = projects.length;
       let project = projectFactory(addProjectName.value, "project"+ projectCount);
       projectCount ++;
-      projects.push(project);
+      projects.push(project)
+      populateStorage(projects);
   };
 
   function deleteProject (projectId) {
