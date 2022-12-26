@@ -1,15 +1,16 @@
 import {addProjectName} from "./UI.js";
-import {populateStorage} from './localStorage.js';
+import {populateStorage, deleteStorage} from './localStorage.js';
 
 export const projects = [{
   name: "",
   id: "project0"
 }];  
 
-function projectFactory (name, id) {
+function projectFactory (name, id, date) {
   name = name;
   id = id;
-  return {name, id}; 
+  date = date;
+  return {name, id, date}; 
 }
 
 
@@ -18,16 +19,17 @@ export const projectsManager = (function () {
   
   function addProject () {
     let projectCount = projects.length;
-      let project = projectFactory(addProjectName.value, "project"+ projectCount);
+      let project = projectFactory(addProjectName.value, "project"+ projectCount, new Date());
       projectCount ++;
       projects.push(project)
-      populateStorage(projects);
+      populateStorage(project);
   };
 
   function deleteProject (projectId) {
     projects.forEach(function (project) {
       if (projectId === project.id) {
        projects.splice([projects.indexOf(project)],1);
+       deleteStorage(projectId);
       };
     });
   };
