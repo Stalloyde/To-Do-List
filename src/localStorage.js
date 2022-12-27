@@ -21,6 +21,7 @@ export function getStorage () {
 }
 
 export function appendStorage () {
+    getStorage();
     projects.forEach(function (project) {
         if (project.name !== "") {
             UI.appendNewProject(project);
@@ -29,13 +30,11 @@ export function appendStorage () {
 }
 
 export function deleteStorage (projectId) {
-    const destringProjects = JSON.parse(localStorage.getItem("projects"));
-    
-    for (const project in destringProjects) {
-        if (destringProjects[project].id === projectId) {
-            console.log(destringProjects[project].name)
-            localStorage.removeItem(destringProjects[project].name);
+    getStorage();
+    projects.forEach(function (project) {    
+        if (project.id === projectId) {
+            localStorage.removeItem(projectId);
         };
-    }
+    });
 }
 
