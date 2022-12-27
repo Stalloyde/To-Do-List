@@ -24,5 +24,4 @@ closeTaskModalBtn.addEventListener("click", function () {
     UI.closeTaskModal()
 });
 
-getStorage();
 appendStorage();
