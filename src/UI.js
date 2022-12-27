@@ -154,7 +154,6 @@ export const UI = (function () {
                 editProjectBtnContainer.appendChild(projectCancelEdit);
 
                 projectSubmitEdit.addEventListener("click", function () {
-                    console.log(projects.length)
                     if (editProjectInput.value !== "")  {
                         const projectName = project.querySelector(".project-name");
                         let projectNewName = editProjectInput.value;

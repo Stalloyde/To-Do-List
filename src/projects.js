@@ -1,5 +1,5 @@
 import {addProjectName} from "./UI.js";
-import {populateStorage, deleteStorage} from './localStorage.js';
+import {populateStorage, deleteStorage, editStorage} from './localStorage.js';
 
 export const projects = [{
   name: "",
@@ -29,18 +29,19 @@ export const projectsManager = (function () {
     projects.forEach(function (project) {
       if (projectId === project.id) {
        projects.splice([projects.indexOf(project)],1);
-       deleteStorage(projectId);
+       deleteStorage(project.id);
       };
     });
   };
   
   function editProject (projectId, newName) { 
-     projects.forEach(function (project) {
+    projects.forEach(function (project) {
       if (projectId === project.id) {
         project.name = newName;
+        editStorage(project, project.name);
         return project.name;
       };
-     });
+    });
   };
 
   function mostRecentProject () {

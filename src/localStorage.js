@@ -38,3 +38,11 @@ export function deleteStorage (projectId) {
     });
 }
 
+export function editStorage (project) {
+    const stringProjects = JSON.stringify(project);
+    projects.forEach(function (item) {    
+        if (project.id === item.id) {
+            localStorage.setItem(project.id, stringProjects);
+        };
+    });
+}
