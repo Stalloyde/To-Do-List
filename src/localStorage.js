@@ -4,7 +4,6 @@ import {UI} from "./UI.js";
 
 export function populateStorage (project) {
     const stringProjects = JSON.stringify(project);
-    console.log(stringProjects)
     localStorage.setItem(project.id, stringProjects);
 }
 
@@ -12,18 +11,21 @@ export function getStorage () {
     Object.keys(localStorage).forEach(function (project) {
         const destringProjects = JSON.parse(localStorage.getItem(project));
         projects.push(destringProjects);
-        projects.sort(function (a,b) {
-            let x = new Date(a.date)
-            let y = new Date(b.date)
-            return x-y;
-        })
-    });    
+    });
 
-    for (const project in projects) {
-        if (projects[project].name !== "") {
-            UI.appendNewProject(projects[project]);
+    projects.sort(function (a,b) {
+        let x = new Date(a.date)
+        let y = new Date(b.date)
+        return x-y;
+    });
+}
+
+export function appendStorage () {
+    projects.forEach(function (project) {
+        if (project.name !== "") {
+            UI.appendNewProject(project);
         };
-    };
+    });
 }
 
 export function deleteStorage (projectId) {
