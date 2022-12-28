@@ -1,13 +1,16 @@
+import { get } from 'lodash';
+import {storage} from './localStorage.js';
 import {projectsManager} from './projects.js';
 import {addTaskName, addTaskDate, addTaskDescription, currentProjectHeader} from './UI.js';
 
 
-function taskFactory (name, description, dueDate, id) {
+function taskFactory (name, description, dueDate, id, status) {
     name = name;
     description = description;
     dueDate = dueDate;
     id = id
-    return {name, description, dueDate, id};
+    status = status
+    return {name, description, dueDate, id, status};
 }
 
 export const tasksManager = (function () { 
@@ -21,12 +24,14 @@ export const tasksManager = (function () {
         getCurrentProject();
         
         const currentProjectLength = Object.keys(getCurrentProject()).length;
-            let taskCount = currentProjectLength-1;
-            let task = taskFactory(addTaskName.value, addTaskDescription.value, addTaskDate.value, "task" + taskCount);
-            
-            (function nameTaskProp () {
-                getCurrentProject()["task" + taskCount] = task;
-            })();
+        let taskCount = currentProjectLength-2;
+        let task = taskFactory(addTaskName.value, addTaskDescription.value, addTaskDate.value, "task" + taskCount, "Not Complete");
+        
+        (function nameTaskProp () {
+            getCurrentProject()["task" + taskCount] = task;
+        })();
+        
+        storage.populateTaskStorage(getCurrentProject().id);
     };
 
 
@@ -58,6 +63,7 @@ export const tasksManager = (function () {
         } else {
             getCurrentTask(taskId).status = "Complete";
         };
+        storage.populateTaskStorage(getCurrentProject().id);
     };
     return {getCurrentProject, addTask, getMostRecentTask, getCurrentTask, deleteTask, editTask, updateTaskStatus}
 })();

@@ -2,6 +2,8 @@ import { update } from 'lodash';
 import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
 import format from "date-fns/format";
+import {storage} from './localStorage.js';
+
 
 export const addProjectBtn = document.getElementById("add-project-btn");
 export const addTaskBtn = document.getElementById("add-task-btn");
@@ -272,6 +274,7 @@ export const UI = (function () {
         editBtn.addEventListener("click", editTask);
         delBtn.addEventListener("click", deleteTaskDiv);
         taskList.addEventListener("click", markComplete)
+        storage.appendTaskStorage();
     };
 
     function editTask (e) {
@@ -388,18 +391,22 @@ export const UI = (function () {
             const editTaskBtn = task.querySelector(".edit-task-btn");
             const dueDate = task.querySelector(".due-date");
             
-                if (e.target.id === task.id && e.target != editTaskBtn) {
-                    if (tasksManager.getCurrentTask(task.id).status === "Complete") {  
-                        taskNameDescriptionContainer.classList.remove("complete");
-                        dueDate.classList.remove("complete");
-                        task.classList.remove("complete");                   
-                    } else {
-                        taskNameDescriptionContainer.classList.add("complete");
-                        dueDate.classList.add("complete");  
-                        task.classList.add("complete");                    
-                    };
+            if (e.target.id === task.id && e.target != editTaskBtn) {
                 tasksManager.updateTaskStatus(task.id);
+                styleComplete();
+            };
+
+            function styleComplete() {
+                if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {  
+                    taskNameDescriptionContainer.classList.remove("complete");
+                    dueDate.classList.remove("complete");
+                    task.classList.remove("complete");                   
+                } else {
+                    taskNameDescriptionContainer.classList.add("complete");
+                    dueDate.classList.add("complete");  
+                    task.classList.add("complete");                    
                 };
+            };
         });
     };
 

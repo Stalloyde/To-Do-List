@@ -2,9 +2,7 @@ import _ from 'lodash';
 import './style.css';
 import {UI, addProjectBtn, addTaskBtn} from './UI.js';
 import { getUnixTime } from 'date-fns';
-import {populateStorage, getStorage, appendStorage} from './localStorage.js';
-import {projects, projectsManager} from './projects.js';
-
+import {storage} from './localStorage.js';
 
 addProjectBtn.addEventListener("click", function () {
     UI.openProjectModal();
@@ -24,4 +22,5 @@ closeTaskModalBtn.addEventListener("click", function () {
     UI.closeTaskModal()
 });
 
-appendStorage();
+storage.appendStorage();
+storage.appendTaskStorage();
