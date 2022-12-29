@@ -1,4 +1,4 @@
-import { xor } from 'lodash';
+import { indexOf, xor } from 'lodash';
 import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
 import {UI} from "./UI.js";
@@ -90,5 +90,17 @@ export const storage = (function () {
         };
     };
     
-    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, editTaskStorage}
+
+    function deleteTaskStorage (task) {
+        const currentProject = tasksManager.getCurrentProject();
+        const currentTaskKey = task;
+        for (const keys in currentProject) {
+            if (keys === currentTaskKey) {
+                delete currentProject[keys];
+                localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
+            };
+        };
+    };
+
+    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, editTaskStorage, deleteTaskStorage}
 })();

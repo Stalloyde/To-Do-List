@@ -49,6 +49,7 @@ export const tasksManager = (function () {
 
     function deleteTask (taskId) {
         getCurrentProject()[taskId] = {};
+        storage.deleteTaskStorage(taskId);
     };
 
     function editTask (taskId, newTaskName, newTaskDescription, newTaskDate) {
