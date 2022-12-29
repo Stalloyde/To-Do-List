@@ -3,6 +3,7 @@ import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
 import {UI} from "./UI.js";
 
+
 export const storage = (function () {
     function populateStorage (project) {
         const stringProjects = JSON.stringify(project);
@@ -27,18 +28,11 @@ export const storage = (function () {
         projects.forEach(function (project) {
             if (project.name !== "") {
                 UI.appendNewProject(project);
-
-                const currentProjectLength = Object.keys(project).length;
-                let taskCount = currentProjectLength-3;
-                for (let x = 1; x <= taskCount; x++) {
-                    UI.appendNewTask(project[`task${x}`]);
-                }
             };
         });
     };
 
     function deleteStorage (projectId) {
-        getStorage();
         projects.forEach(function (project) {    
             if (project.id === projectId) {
                 localStorage.removeItem(projectId);
@@ -64,6 +58,20 @@ export const storage = (function () {
     };
 
     function appendTaskStorage() {
+        const currentProject = tasksManager.getCurrentProject();
+        projects.forEach(function (project) {
+            const currentProjectLength = Object.keys(project).length;
+            let taskCount = currentProjectLength-3;
+            if (project.id === currentProject.id) {
+                for (let x = 1; x <= taskCount; x++) {
+                UI.appendNewTask(project[`task${x}`]);
+                };
+            };
+        });
+        styleTaskStorage();
+    }
+
+    function styleTaskStorage() {
         const taskList = document.querySelectorAll(".task-list");
         taskList.forEach(function (task) {
             const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
@@ -102,5 +110,5 @@ export const storage = (function () {
         };
     };
 
-    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, editTaskStorage, deleteTaskStorage}
+    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, styleTaskStorage, editTaskStorage, deleteTaskStorage}
 })();

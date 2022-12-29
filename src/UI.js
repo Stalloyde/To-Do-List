@@ -123,7 +123,7 @@ export const UI = (function () {
     };
 
     function editProject (e) {
-    const projectList = document.querySelectorAll(".project-list");
+        const projectList = document.querySelectorAll(".project-list");
 
         projectList.forEach(function (project) {
             if (e.target.id === project.id) {
@@ -165,6 +165,7 @@ export const UI = (function () {
                         project.style.display = "grid";
                         projectsManager.editProject(project.id, projectNewName);
                         setAsCurrentProject(project.id)
+                        storage.editStorage(project.id)
                     };
                 });
 
@@ -190,7 +191,8 @@ export const UI = (function () {
             };
 
             const projectListLength = Array.from(projectList).length 
-            if (projectListLength.length === 1) {
+            if (projectListLength === 1) {
+                console.log(projects)
                 updateProjectHeader();
             }
         });
@@ -274,7 +276,6 @@ export const UI = (function () {
         editBtn.addEventListener("click", editTask);
         delBtn.addEventListener("click", deleteTaskDiv);
         taskList.addEventListener("click", markComplete)
-        storage.appendTaskStorage();
     };
 
     function editTask (e) {
@@ -378,6 +379,7 @@ export const UI = (function () {
                 const currentProjectTasks = currentProject[property];
                 if (Object.keys(currentProjectTasks).length > 1) {
                     appendNewTask(currentProjectTasks);
+                    storage.styleTaskStorage();
                 };
             };
         };

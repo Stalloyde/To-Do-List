@@ -27,8 +27,8 @@ export const projectsManager = (function () {
   function deleteProject (projectId) {
     projects.forEach(function (project) {
       if (projectId === project.id) {
-       projects.splice([projects.indexOf(project)],1);
-       deleteStorage(project.id);
+        storage.deleteStorage(project.id);
+        projects.splice([projects.indexOf(project)],1);
       };
     });
   };
@@ -37,7 +37,7 @@ export const projectsManager = (function () {
     projects.forEach(function (project) {
       if (projectId === project.id) {
         project.name = newName;
-        editStorage(project, project.name);
+        storage.editStorage(project, project.name);
         return project.name;
       };
     });
