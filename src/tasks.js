@@ -55,6 +55,7 @@ export const tasksManager = (function () {
         getCurrentTask(taskId).name = newTaskName;
         getCurrentTask(taskId).description = newTaskDescription;
         getCurrentTask(taskId).dueDate = newTaskDate;
+        storage.editTaskStorage(getCurrentTask(taskId)); 
     };
 
     function updateTaskStatus (taskId) {

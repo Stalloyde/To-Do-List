@@ -1,5 +1,5 @@
 import { xor } from 'lodash';
-import {projects} from './projects.js';
+import {projects, projectsManager} from './projects.js';
 import {tasksManager} from './tasks.js';
 import {UI} from "./UI.js";
 
@@ -37,23 +37,6 @@ export const storage = (function () {
         });
     };
 
-    function appendTaskStorage() {
-        const taskList = document.querySelectorAll(".task-list");
-        taskList.forEach(function (task) {
-            const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
-            const dueDate = task.querySelector(".due-date");
-            if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {  
-                taskNameDescriptionContainer.classList.remove("complete");
-                dueDate.classList.remove("complete");
-                task.classList.remove("complete");                   
-            } else {
-                taskNameDescriptionContainer.classList.add("complete");
-                dueDate.classList.add("complete");  
-                task.classList.add("complete");                    
-            };
-        });
-    }
-
     function deleteStorage (projectId) {
         getStorage();
         projects.forEach(function (project) {    
@@ -80,5 +63,32 @@ export const storage = (function () {
         });
     };
 
-    return {populateStorage, getStorage, appendStorage, appendTaskStorage, deleteStorage, editStorage, populateTaskStorage}
+    function appendTaskStorage() {
+        const taskList = document.querySelectorAll(".task-list");
+        taskList.forEach(function (task) {
+            const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
+            const dueDate = task.querySelector(".due-date");
+            if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {  
+                taskNameDescriptionContainer.classList.remove("complete");
+                dueDate.classList.remove("complete");
+                task.classList.remove("complete");                   
+            } else {
+                taskNameDescriptionContainer.classList.add("complete");
+                dueDate.classList.add("complete");  
+                task.classList.add("complete");                    
+            };
+        });
+    }
+
+    function editTaskStorage (task) {
+        const currentProject = tasksManager.getCurrentProject();
+        const currentTaskKey = task.id;
+        for (const keys in currentProject) {
+            if (keys === currentTaskKey) {
+                localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
+            };
+        };
+    };
+    
+    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, editTaskStorage}
 })();
