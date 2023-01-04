@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-self-assign */
 import { addProjectName } from "./UI";
 import storage from "./localStorage";
 
@@ -35,8 +37,8 @@ function editProject(projectId, newName) {
     if (projectId === project.id) {
       project.name = newName;
       storage.editStorage(project, project.name);
-      return project.name;
     }
+    return project.name;
   });
 }
 

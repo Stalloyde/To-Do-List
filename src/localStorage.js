@@ -78,7 +78,7 @@ function appendTaskStorage() {
     const currentProjectLength = Object.keys(project).length;
     const taskCount = currentProjectLength - 3;
     if (project.id === currentProject.id) {
-      for (let x = 1; x <= taskCount; x++) {
+      for (let x = 1; x <= taskCount; x += 1) {
         UI.appendNewTask(project[`task${x}`]);
       }
     }
@@ -89,22 +89,25 @@ function appendTaskStorage() {
 function editTaskStorage(task) {
   const currentProject = tasksManager.getCurrentProject();
   const currentTaskKey = task.id;
-  for (const keys in currentProject) {
-    if (keys === currentTaskKey) {
+  const keysArray = Object.keys(currentProject);
+  keysArray.forEach((key) => {
+    if (key === currentTaskKey) {
       localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
     }
-  }
+  });
 }
 
 function deleteTaskStorage(task) {
   const currentProject = tasksManager.getCurrentProject();
   const currentTaskKey = task;
-  for (const keys in currentProject) {
-    if (keys === currentTaskKey) {
-      delete currentProject[keys];
+
+  const keysArray = Object.keys(currentProject);
+  keysArray.forEach((key) => {
+    if (key === currentTaskKey) {
+      delete currentProject[key];
       localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
     }
-  }
+  });
 }
 
 export default {

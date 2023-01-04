@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-self-assign */
 import { get } from "lodash";
 import storage from "./localStorage";
 import projectsManager, { projects } from "./projects";
