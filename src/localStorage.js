@@ -1,114 +1,121 @@
-import { indexOf, xor } from 'lodash';
-import {projects, projectsManager} from './projects.js';
-import {tasksManager} from './tasks.js';
-import {UI} from "./UI.js";
+import { indexOf, xor } from "lodash";
+import projectsManager, { projects } from "./projects";
+import tasksManager from "./tasks";
+import UI from "./UI";
 
+function populateStorage(project) {
+  const stringProjects = JSON.stringify(project);
+  localStorage.setItem(project.id, stringProjects);
+}
 
-export const storage = (function () {
-    function populateStorage (project) {
-        const stringProjects = JSON.stringify(project);
-        localStorage.setItem(project.id, stringProjects);
+function getStorage() {
+  Object.keys(localStorage).forEach((project) => {
+    const destringProjects = JSON.parse(localStorage.getItem(project));
+    projects.push(destringProjects);
+  });
+
+  projects.sort((a, b) => {
+    const x = new Date(a.date);
+    const y = new Date(b.date);
+    return x - y;
+  });
+}
+
+function appendStorage() {
+  getStorage();
+  projects.forEach((project) => {
+    if (project.name !== "") {
+      UI.appendNewProject(project);
     }
+  });
+}
 
-    function getStorage () {
-        Object.keys(localStorage).forEach(function (project) {
-            const destringProjects = JSON.parse(localStorage.getItem(project));
-            projects.push(destringProjects);
-        });
-
-        projects.sort(function (a,b) {
-            let x = new Date(a.date);
-            let y = new Date(b.date);
-            return x-y;
-        });
+function deleteStorage(projectId) {
+  projects.forEach((project) => {
+    if (project.id === projectId) {
+      localStorage.removeItem(projectId);
     }
+  });
+}
 
-    function appendStorage () {
-        getStorage();
-        projects.forEach(function (project) {
-            if (project.name !== "") {
-                UI.appendNewProject(project);
-            };
-        });
-    };
-
-    function deleteStorage (projectId) {
-        projects.forEach(function (project) {    
-            if (project.id === projectId) {
-                localStorage.removeItem(projectId);
-            };
-        });
+function editStorage(project) {
+  const stringProjects = JSON.stringify(project);
+  projects.forEach((item) => {
+    if (project.id === item.id) {
+      localStorage.setItem(project.id, stringProjects);
     }
+  });
+}
 
-    function editStorage (project) {
-        const stringProjects = JSON.stringify(project);
-        projects.forEach(function (item) {    
-            if (project.id === item.id) {
-                localStorage.setItem(project.id, stringProjects);
-            };
-        });
+function populateTaskStorage(projectId) {
+  projects.forEach((project) => {
+    if (projectId === project.id) {
+      localStorage.setItem(project.id, JSON.stringify(project));
     }
+  });
+}
 
-    function populateTaskStorage (projectId) {
-        projects.forEach(function (project) {
-            if (projectId === project.id) {
-                localStorage.setItem(project.id, JSON.stringify(project));
-            };
-        });
-    };
-
-    function appendTaskStorage() {
-        const currentProject = tasksManager.getCurrentProject();
-        projects.forEach(function (project) {
-            const currentProjectLength = Object.keys(project).length;
-            let taskCount = currentProjectLength-3;
-            if (project.id === currentProject.id) {
-                for (let x = 1; x <= taskCount; x++) {
-                UI.appendNewTask(project[`task${x}`]);
-                };
-            };
-        });
-        styleTaskStorage();
+function styleTaskStorage() {
+  const taskList = document.querySelectorAll(".task-list");
+  taskList.forEach((task) => {
+    const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
+    const dueDate = task.querySelector(".due-date");
+    if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {
+      taskNameDescriptionContainer.classList.remove("complete");
+      dueDate.classList.remove("complete");
+      task.classList.remove("complete");
+    } else {
+      taskNameDescriptionContainer.classList.add("complete");
+      dueDate.classList.add("complete");
+      task.classList.add("complete");
     }
+  });
+}
 
-    function styleTaskStorage() {
-        const taskList = document.querySelectorAll(".task-list");
-        taskList.forEach(function (task) {
-            const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
-            const dueDate = task.querySelector(".due-date");
-            if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {  
-                taskNameDescriptionContainer.classList.remove("complete");
-                dueDate.classList.remove("complete");
-                task.classList.remove("complete");                   
-            } else {
-                taskNameDescriptionContainer.classList.add("complete");
-                dueDate.classList.add("complete");  
-                task.classList.add("complete");                    
-            };
-        });
+function appendTaskStorage() {
+  const currentProject = tasksManager.getCurrentProject();
+  projects.forEach((project) => {
+    const currentProjectLength = Object.keys(project).length;
+    const taskCount = currentProjectLength - 3;
+    if (project.id === currentProject.id) {
+      for (let x = 1; x <= taskCount; x++) {
+        UI.appendNewTask(project[`task${x}`]);
+      }
     }
+  });
+  styleTaskStorage();
+}
 
-    function editTaskStorage (task) {
-        const currentProject = tasksManager.getCurrentProject();
-        const currentTaskKey = task.id;
-        for (const keys in currentProject) {
-            if (keys === currentTaskKey) {
-                localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
-            };
-        };
-    };
-    
+function editTaskStorage(task) {
+  const currentProject = tasksManager.getCurrentProject();
+  const currentTaskKey = task.id;
+  for (const keys in currentProject) {
+    if (keys === currentTaskKey) {
+      localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
+    }
+  }
+}
 
-    function deleteTaskStorage (task) {
-        const currentProject = tasksManager.getCurrentProject();
-        const currentTaskKey = task;
-        for (const keys in currentProject) {
-            if (keys === currentTaskKey) {
-                delete currentProject[keys];
-                localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
-            };
-        };
-    };
+function deleteTaskStorage(task) {
+  const currentProject = tasksManager.getCurrentProject();
+  const currentTaskKey = task;
+  for (const keys in currentProject) {
+    if (keys === currentTaskKey) {
+      delete currentProject[keys];
+      localStorage.setItem(currentProject.id, JSON.stringify(currentProject));
+    }
+  }
+}
 
-    return {populateStorage, getStorage, appendStorage, deleteStorage, editStorage, populateTaskStorage, appendTaskStorage, styleTaskStorage, editTaskStorage, deleteTaskStorage}
-})();
+export default {
+  populateStorage,
+  getStorage,
+  appendStorage,
+  deleteStorage,
+  editStorage,
+  populateTaskStorage,
+  styleTaskStorage,
+  appendTaskStorage,
+  editTaskStorage,
+  deleteTaskStorage,
+};

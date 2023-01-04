@@ -1,25 +1,25 @@
-import _ from 'lodash';
-import './style.css';
-import {UI, addProjectBtn, addTaskBtn} from './UI.js';
-import { getUnixTime } from 'date-fns';
-import {storage} from './localStorage.js';
+import _ from "lodash";
+import "./style.css";
+import { getUnixTime } from "date-fns";
+import UI, { addProjectBtn, addTaskBtn } from "./UI";
+import storage from "./localStorage";
 
-addProjectBtn.addEventListener("click", function () {
-    UI.openProjectModal();
+addProjectBtn.addEventListener("click", () => {
+  UI.openProjectModal();
 });
 
 const closeProjectModalBtn = document.getElementById("close-project-modal");
-closeProjectModalBtn.addEventListener("click", function () {
-    UI.closeProjectModal()  
+closeProjectModalBtn.addEventListener("click", () => {
+  UI.closeProjectModal();
 });
 
-addTaskBtn.addEventListener("click", function () {
-    UI.openTaskModal()
+addTaskBtn.addEventListener("click", () => {
+  UI.openTaskModal();
 });
 
 const closeTaskModalBtn = document.getElementById("close-task-modal");
-closeTaskModalBtn.addEventListener("click", function () {
-    UI.closeTaskModal()
+closeTaskModalBtn.addEventListener("click", () => {
+  UI.closeTaskModal();
 });
 
 storage.appendStorage();
