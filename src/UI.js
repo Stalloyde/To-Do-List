@@ -7,13 +7,19 @@ import storage from "./localStorage";
 
 export const addProjectBtn = document.getElementById("add-project-btn");
 export const addTaskBtn = document.getElementById("add-task-btn");
-export const addProjectContainer = document.querySelector(".add-project-container");
+export const addProjectContainer = document.querySelector(
+  ".add-project-container"
+);
 export const addProjectName = document.getElementById("add-project-name");
-export const currentProjectHeader = document.querySelector(".current-project-header");
+export const currentProjectHeader = document.querySelector(
+  ".current-project-header"
+);
 export const taskContainer = document.querySelector(".tasks-container");
 export const addTaskName = document.getElementById("add-task-name");
 export const addTaskDate = document.getElementById("add-task-date");
-export const addTaskDescription = document.getElementById("add-task-description");
+export const addTaskDescription = document.getElementById(
+  "add-task-description"
+);
 const projectModal = document.querySelector(".project-modal");
 const taskModal = document.querySelector(".task-modal");
 
@@ -62,7 +68,8 @@ function editProject(e) {
       addProjectContainer.insertBefore(editProjectContainer, project);
 
       const editProjectInput = document.createElement("input");
-      const originalProjectName = project.querySelector(".project-name").textContent;
+      const originalProjectName =
+        project.querySelector(".project-name").textContent;
       editProjectInput.value = originalProjectName;
       editProjectInput.className = "edit-project-input";
       editProjectContainer.appendChild(editProjectInput);
@@ -124,7 +131,8 @@ function editTask(e) {
       taskContainer.insertBefore(editTaskContainer, task);
 
       const editTaskNameDescriptionContainer = document.createElement("div");
-      editTaskNameDescriptionContainer.className = "edit-task-name-description-container";
+      editTaskNameDescriptionContainer.className =
+        "edit-task-name-description-container";
       editTaskContainer.appendChild(editTaskNameDescriptionContainer);
       const editTaskNameInput = document.createElement("input");
       const originalTaskName = task.querySelector(".task-name").textContent;
@@ -133,7 +141,8 @@ function editTask(e) {
       editTaskNameDescriptionContainer.appendChild(editTaskNameInput);
 
       const editTaskDescriptionInput = document.createElement("input");
-      const originalTaskDescription = task.querySelector(".task-description").textContent;
+      const originalTaskDescription =
+        task.querySelector(".task-description").textContent;
       editTaskDescriptionInput.value = originalTaskDescription;
       editTaskDescriptionInput.className = "edit-task-description";
       editTaskNameDescriptionContainer.appendChild(editTaskDescriptionInput);
@@ -171,12 +180,15 @@ function editTask(e) {
 
           taskName.textContent = editTaskNameInput.value;
           taskDescription.textContent = editTaskDescriptionInput.value;
-          dueDate.textContent = format(new Date(editTaskDateInput.value), "dd LLL yy");
+          dueDate.textContent = format(
+            new Date(editTaskDateInput.value),
+            "dd LLL yy"
+          );
           tasksManager.editTask(
             task.id,
             taskName.textContent,
             taskDescription.textContent,
-            editTaskDateInput.value,
+            editTaskDateInput.value
           );
           editTaskContainer.remove();
         }
@@ -208,7 +220,9 @@ function markComplete(e) {
   const taskList = document.querySelectorAll(".task-list");
 
   taskList.forEach((task) => {
-    const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
+    const taskNameDescriptionContainer = task.querySelector(
+      ".task-name-description-container"
+    );
     const editTaskBtn = task.querySelector(".edit-task-btn");
     const dueDate = task.querySelector(".due-date");
 
@@ -402,9 +416,13 @@ function taskAddErrorModal() {
   taskAddError.textContent = "Oops! Add a project before trying again.";
   taskAddErrorContainer.appendChild(taskAddError);
 
-  window.addEventListener("click", () => {
-    taskAddErrorContainer.remove();
-  }, true);
+  window.addEventListener(
+    "click",
+    () => {
+      taskAddErrorContainer.remove();
+    },
+    true
+  );
 }
 
 function openTaskModal() {

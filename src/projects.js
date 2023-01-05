@@ -3,10 +3,12 @@
 import { addProjectName } from "./UI";
 import storage from "./localStorage";
 
-export const projects = [{
-  name: "",
-  id: "project0",
-}];
+export const projects = [
+  {
+    name: "",
+    id: "project0",
+  },
+];
 
 function projectFactory(name, id, date) {
   name = name;
@@ -17,7 +19,11 @@ function projectFactory(name, id, date) {
 
 function addProject() {
   let projectCount = projects.length;
-  const project = projectFactory(addProjectName.value, `project${projectCount}`, new Date());
+  const project = projectFactory(
+    addProjectName.value,
+    `project${projectCount}`,
+    new Date()
+  );
   projectCount += 1;
   projects.push(project);
   storage.populateStorage(project);

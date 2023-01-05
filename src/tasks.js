@@ -4,7 +4,10 @@ import { get } from "lodash";
 import storage from "./localStorage";
 import projectsManager, { projects } from "./projects";
 import UI, {
-  addTaskName, addTaskDate, addTaskDescription, currentProjectHeader,
+  addTaskName,
+  addTaskDate,
+  addTaskDescription,
+  currentProjectHeader,
 } from "./UI";
 
 function taskFactory(name, description, dueDate, id, status) {
@@ -14,12 +17,18 @@ function taskFactory(name, description, dueDate, id, status) {
   id = id;
   status = status;
   return {
-    name, description, dueDate, id, status,
+    name,
+    description,
+    dueDate,
+    id,
+    status,
   };
 }
 
 function getCurrentProject() {
-  const currentProject = projectsManager.setCurrentProject(currentProjectHeader.id);
+  const currentProject = projectsManager.setCurrentProject(
+    currentProjectHeader.id
+  );
   return currentProject;
 }
 
@@ -28,11 +37,17 @@ function addTask() {
 
   const currentProjectLength = Object.keys(getCurrentProject()).length;
   const taskCount = currentProjectLength - 2;
-  const task = taskFactory(addTaskName.value, addTaskDescription.value, addTaskDate.value, `task${taskCount}`, "Not Complete");
+  const task = taskFactory(
+    addTaskName.value,
+    addTaskDescription.value,
+    addTaskDate.value,
+    `task${taskCount}`,
+    "Not Complete"
+  );
 
   (function nameTaskProp() {
     getCurrentProject()[`task${taskCount}`] = task;
-  }());
+  })();
 
   storage.populateTaskStorage(getCurrentProject().id);
 }

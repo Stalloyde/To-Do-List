@@ -58,7 +58,9 @@ function populateTaskStorage(projectId) {
 function styleTaskStorage() {
   const taskList = document.querySelectorAll(".task-list");
   taskList.forEach((task) => {
-    const taskNameDescriptionContainer = task.querySelector(".task-name-description-container");
+    const taskNameDescriptionContainer = task.querySelector(
+      ".task-name-description-container"
+    );
     const dueDate = task.querySelector(".due-date");
     if (tasksManager.getCurrentTask(task.id).status === "Not Complete") {
       taskNameDescriptionContainer.classList.remove("complete");

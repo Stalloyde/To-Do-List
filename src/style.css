@@ -1,20 +1,20 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    position: relative;
-  }
-  
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
 .content-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr 10fr;
   text-align: center;
   height: 100vh;
-} 
+}
 
 h1 {
-  background-color:rgb(32, 30, 31);
+  background-color: rgb(32, 30, 31);
   color: white;
   text-align: center;
   padding: 1em;
@@ -25,7 +25,7 @@ h2 {
   text-align: center;
 }
 
-.side-container { 
+.side-container {
   background-color: rgb(254, 239, 221);
   border: 1px solid black;
   text-align: left;
@@ -45,7 +45,7 @@ h2 {
 
 .project-modal {
   margin: 1em;
-  background-color:rgb(80, 178, 192);
+  background-color: rgb(80, 178, 192);
   border-radius: 10px;
   border: 1px solid black;
   display: none;
@@ -55,7 +55,7 @@ h2 {
 }
 
 .project-modal-button-container {
-  display:flex;
+  display: flex;
   gap: 20px;
   padding: 1em;
 }
@@ -65,7 +65,8 @@ h2 {
   padding: 0.1em;
 }
 
-.edit-project-container, .project-list {
+.edit-project-container,
+.project-list {
   display: grid;
   border-radius: 10px;
   margin-bottom: 0.5em;
@@ -80,12 +81,19 @@ h2 {
   border: 1px solid rgb(250, 170, 141);
 }
 
-.edit-project-btn-container, .project-btn-container, .task-btn-container, .edit-task-btn-container  {
+.edit-project-btn-container,
+.project-btn-container,
+.task-btn-container,
+.edit-task-btn-container {
   display: flex;
   justify-content: space-evenly;
 }
 
-.project-list-btn, .edit-task-btn, .del-task-btn, .submit-edit-btn, .cancel-edit-btn {
+.project-list-btn,
+.edit-task-btn,
+.del-task-btn,
+.submit-edit-btn,
+.cancel-edit-btn {
   width: 50px;
   height: 20px;
 }
@@ -115,13 +123,15 @@ h2 {
 .task-modal {
   display: none;
   margin: 1em;
-  background-color:rgb(80, 178, 192);
+  background-color: rgb(80, 178, 192);
   border: 1px solid black;
   border-radius: 10px;
   justify-content: space-evenly;
 }
 
-.add-task-name-container, .add-task-date-container, .add-task-description-container {
+.add-task-name-container,
+.add-task-date-container,
+.add-task-description-container {
   display: grid;
   padding: 1em;
   text-align: left;
@@ -136,7 +146,9 @@ h2 {
   align-items: center;
 }
 
-.task-modal-button-container > button, .project-modal-button-container > button,input[type="submit"] {
+.task-modal-button-container > button,
+.project-modal-button-container > button,
+input[type="submit"] {
   grid-row: 2 / 2;
   width: 50px;
 }
@@ -146,7 +158,8 @@ h2 {
   padding: 0.1em;
 }
 
-#add-task-name, #add-task-description {
+#add-task-name,
+#add-task-description {
   padding: 0.1em;
 }
 
@@ -157,24 +170,27 @@ button {
   font-style: italic;
 }
 
-input, textarea {
+input,
+textarea {
   font-style: italic;
   border-radius: 3px;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover,
+input[type="submit"]:hover {
   cursor: pointer;
 }
 
-.add-project-button-container, .add-task-button-container {
+.add-project-button-container,
+.add-task-button-container {
   padding: 0.5em;
   display: grid;
-  justify-content: center;  
+  justify-content: center;
 }
 
 .task-add-error-container {
   border: 1px solid black;
-  background-color:rgb(32, 30, 31);
+  background-color: rgb(32, 30, 31);
   border-radius: 10px;
   color: white;
   position: absolute;
@@ -183,7 +199,8 @@ button:hover, input[type="submit"]:hover {
   padding: 1em;
 }
 
-.task-list, .edit-task-container {
+.task-list,
+.edit-task-container {
   display: grid;
   border-bottom: 1px solid black;
   grid-template-columns: 3fr 1fr 1fr;
@@ -192,9 +209,10 @@ button:hover, input[type="submit"]:hover {
   gap: 5px;
 }
 
-.task-list:hover, .edit-task-container:hover {
+.task-list:hover,
+.edit-task-container:hover {
   cursor: pointer;
-  background-color:rgb(250, 170, 141);
+  background-color: rgb(250, 170, 141);
   border-radius: 10px;
 }
 
@@ -203,21 +221,26 @@ button:hover, input[type="submit"]:hover {
   display: grid;
 }
 
-.task-name, .task-description, .edit-task-name, .edit-task-description {
+.task-name,
+.task-description,
+.edit-task-name,
+.edit-task-description {
   width: 300px;
   text-align: left;
 }
 
 .task-name {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
-.due-date, .edit-due-date {
+.due-date,
+.edit-due-date {
   width: 120px;
   text-align: right;
 }
 
-.due-date, .task-description {
+.due-date,
+.task-description {
   font-size: smaller;
   font-style: italic;
 }
@@ -226,10 +249,10 @@ button:hover, input[type="submit"]:hover {
   background-color: gray;
   border-radius: 10px;
   text-decoration: line-through;
-}   
+}
 
 .complete:hover {
   background-color: gray;
   border-radius: 10px;
   text-decoration: line-through;
-}   
+}

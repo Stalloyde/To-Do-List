@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do-List</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="content-container">
       <h1>TO-DO LIST</h1>
-      
+
       <div class="side-container">
         <div class="side-container-header">
-          <h2>Projects</h2> 
+          <h2>Projects</h2>
         </div>
-        
-        <div class="add-project-container">   
+
+        <div class="add-project-container">
           <form action="" class="project-modal">
-                  <label for="add-project-name">Project Name: </label>
-                  <input placeholder="required" required type="text" id="add-project-name" name="add-project-name">
-                <div class="project-modal-button-container">
-                  <input type="submit" id="submit-project">
-                  <button id="close-project-modal">Close</button>
-                </div>
+            <label for="add-project-name">Project Name: </label>
+            <input
+              placeholder="required"
+              required
+              type="text"
+              id="add-project-name"
+              name="add-project-name"
+            />
+            <div class="project-modal-button-container">
+              <input type="submit" id="submit-project" />
+              <button id="close-project-modal">Close</button>
+            </div>
           </form>
           <div class="add-project-button-container">
             <button id="add-project-btn">Add Project</button>
           </div>
         </div>
       </div>
-            
+
       <div class="main-container">
         <div class="current-project-container">
           <h2 class="current-project-header"></h2>
@@ -38,27 +44,43 @@
           <h3>Tasks</h3>
 
           <form action="" class="task-modal">
-                <div class="add-task-name-container">
-                  <label for="add-task-name">Task Name: </label>
-                  <input placeholder="required" required type="text" id="add-task-name" name="add-task-name">
-                </div>
-                <div class="add-task-description-container">
-                  <label for="add-task-description">Description: </label>
-                  <textarea placeholder="optional" name="add-task-description" id="add-task-description" cols="40" rows="1 "></textarea>
-                </div>
-                <div class="add-task-date-container">
-                  <label for="add-task-date">Date: </label>
-                  <input required type="date" id="add-task-date" name="add-task-date">
-                </div>
-                <div class="task-modal-button-container">
-                  <input type="submit" id="submit-task">
-                  <button id="close-task-modal">Close</button>
-                </div>
+            <div class="add-task-name-container">
+              <label for="add-task-name">Task Name: </label>
+              <input
+                placeholder="required"
+                required
+                type="text"
+                id="add-task-name"
+                name="add-task-name"
+              />
+            </div>
+            <div class="add-task-description-container">
+              <label for="add-task-description">Description: </label>
+              <textarea
+                placeholder="optional"
+                name="add-task-description"
+                id="add-task-description"
+                cols="40"
+                rows="1 "
+              ></textarea>
+            </div>
+            <div class="add-task-date-container">
+              <label for="add-task-date">Date: </label>
+              <input
+                required
+                type="date"
+                id="add-task-date"
+                name="add-task-date"
+              />
+            </div>
+            <div class="task-modal-button-container">
+              <input type="submit" id="submit-task" />
+              <button id="close-task-modal">Close</button>
+            </div>
           </form>
 
-            <div class="add-task-button-container">
-              <button id="add-task-btn">Add Task</button>
-            </div>
+          <div class="add-task-button-container">
+            <button id="add-task-btn">Add Task</button>
           </div>
         </div>
       </div>
